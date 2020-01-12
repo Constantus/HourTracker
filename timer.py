@@ -69,3 +69,6 @@ class Timer():
         timerHour = timerMinute // 60
         timeTuple = (timerHour, timerMinute, timerSec, timerMillisec)
         return timeTuple
+
+    def getStatus(self):
+        return self.status
