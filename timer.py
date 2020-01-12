@@ -57,11 +57,8 @@ class Timer():
             currentTime = dt.now().timestamp()
             timeDifference = currentTime - self.startTime
             tempInstanceTime = self.instanceTime + timeDifference
-        elif self.status == 'paused':
+        else:
             tempInstanceTime = self.instanceTime
-        else: 
-            # Throw error
-            pass
 
         timerMillisec = int((tempInstanceTime % 1) * 100)
         timerSec = int(tempInstanceTime % 60)
