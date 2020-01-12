@@ -10,7 +10,6 @@ from timer import Timer
 
 def startTimer():
     timer.timerStart()
-    timerRun = True
 
 def pauseTimer():
     timer.timerPause()
@@ -23,11 +22,11 @@ def updateLabel():
     timeString = '%02d:%02d:%02d:%02d' % (timeTuple[0], timeTuple[1], timeTuple[2], timeTuple[3])
     label.configure(text=timeString)
     root.after(10, updateLabel)
-# main code
 
+
+# main code
 timer = Timer()
 root = tk.Tk()
-timerRun = False
 label = tk.Label(root, text='')
 startButton = tk.Button(root, text='Start', command=startTimer)
 pauseButton = tk.Button(root, text='Pause', command=pauseTimer)
