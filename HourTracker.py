@@ -8,14 +8,22 @@ import time
 from timer import Timer
 
 
-def startTimer():
-    timer.timerStart()
+def startPauseTimer():
+    global timerStatus
+    if timerStatus == 'paused' or timerStatus == '':
+        timer.timerStart()
+        startButton.configure(text='Pause')
+        timerStatus = 'running'
+    elif timerStatus == 'running':
+        timer.timerPause()
+        startButton.configure(text='Start')
+        timerStatus = 'paused'
 
-def pauseTimer():
-    timer.timerPause()
 
 def stopTimer():
+    global timerStatus
     timer.timerStop()
+    timerStatus = 'stopped'
 
 def updateLabel():
     timeTuple = timer.getTimeTuple()
@@ -26,14 +34,13 @@ def updateLabel():
 
 # main code
 timer = Timer()
+timerStatus = ''
 root = tk.Tk()
 label = tk.Label(root, text='')
-startButton = tk.Button(root, text='Start', command=startTimer)
-pauseButton = tk.Button(root, text='Pause', command=pauseTimer)
+startButton = tk.Button(root, text='Start', command=startPauseTimer)
 stopButton = tk.Button(root, text='Stop', command=stopTimer)
 label.pack()
 startButton.pack()
-pauseButton.pack()
 stopButton.pack()
 updateLabel()
 root.mainloop()
