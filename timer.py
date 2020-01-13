@@ -40,12 +40,6 @@ class Timer():
             currentTime = dt.now().timestamp()
             timeDifference = currentTime - self.startTime
             self.instanceTime += timeDifference
-        elif self.status == 'paused':
-            # Do Nothing Remove if unnecessary
-            pass
-        else:
-            # Do Nothing
-            pass
         self.status = 'stopped'
         finalTime = self.instanceTime
         self.instanceTime = 0.0
