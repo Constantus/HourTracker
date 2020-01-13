@@ -31,6 +31,8 @@ def updateLabel():
     label.configure(text=timeString)
     root.after(10, updateLabel)
 
+# To-Do: Get and do something with the hours returned by timer.timerStop()
+# Add a timerReset button and then also a timer save button and the logic that goes with it.
 
 # main code
 timer = Timer()
