@@ -8,4 +8,6 @@ from trackerGui import TrackerGui as Tracker
 # Add a timerReset button and then also a timer save button and the logic that goes with it.
 
 # main code
+
+# Call to run the gui interface.
 tracker = Tracker()
