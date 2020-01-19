@@ -15,7 +15,13 @@ class TrackerGui():
         # Initialize root window and top level frames and top level widgets
         self.root = tk.Tk()
         self.timerControls = tk.Frame(self.root)
-        self.timerLabel = tk.Label(self.root, text='')
+        self.timerContainer = tk.Frame(self.root)
+
+        # Initialize Project label and timer.
+        self.projectLabel = tk.Label(self.timerContainer, text='ProjectName')
+        self.timerPrintOut = tk.Label(self.timerContainer, text='', font=('Courier', 30))
+        self.projectLabel.grid(row=0, column=0, pady=2, sticky='W')
+        self.timerPrintOut.grid(row=1, columnspan=5, sticky='W')
 
         # Initialize the timer control buttons.
         self.startButton = tk.Button(self.timerControls, text = 'Start', command=self.startPauseTimer)
@@ -26,7 +32,7 @@ class TrackerGui():
         self.resetButton.grid(row=0, column=2, padx=5)
 
         # Pack top level frames and widgets and start mainloop
-        self.timerLabel.pack()
+        self.timerContainer.pack()
         self.timerControls.pack()
         self.updateTimer()
         self.root.mainloop()
@@ -69,5 +75,5 @@ class TrackerGui():
         """Gets the tuple of the time on the timer and updates the timer label to it."""
         timeTuple = self.timer.getTimeTuple()
         timeString = '%02d:%02d:%02d:%02d' % (timeTuple[0], timeTuple[1], timeTuple[2], timeTuple[3])
-        self.timerLabel.configure(text=timeString)
+        self.timerPrintOut.configure(text=timeString)
         self.root.after(10, self.updateTimer)
