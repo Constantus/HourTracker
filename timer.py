@@ -8,7 +8,6 @@ from datetime import datetime as dt
 class Timer():
     def __init__(self):
         self.instanceTime = 0.0
-        self.timeObject = None
         self.status = 'stopped'
 
     
@@ -35,21 +34,20 @@ class Timer():
     
 
     def timerStop(self):
-        '''Stops the timer, returning the final instance time and resetting the instance time to 0.0.'''
+        '''Stops the timer, returning the final instance time in hours and resetting the instance time to 0.0.'''
         if self.status == 'running':
             currentTime = dt.now().timestamp()
             timeDifference = currentTime - self.startTime
             self.instanceTime += timeDifference
-        elif self.status == 'paused':
-            # Do Nothing Remove if unnecessary
-            pass
-        else:
-            # Do Nothing
-            pass
         self.status = 'stopped'
-        finalTime = self.instanceTime
-        self.instanceTime = 0.0
+        finalTimeSeconds = self.instanceTime
+        finalTime = (finalTimeSeconds / 60) / 60
         return finalTime
+
+    def timerReset(self):
+        '''Resets the timer.'''
+
+        self.__init__()
 
     def getTimeTuple(self):
         '''Returns a tuple of the hours, minutes, seconds, milliseconds on the timer.'''
