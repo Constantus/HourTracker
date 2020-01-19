@@ -7,17 +7,27 @@ from timer import Timer
 
 class TrackerGui():
     def __init__(self):
+        
+        # Initialize timer and timerStatus
         self.timer = Timer()
         self.timerStatus = ''
+
+        # Initialize root window and top level frames and top level widgets
         self.root = tk.Tk()
+        self.timerControls = tk.Frame(self.root)
         self.timerLabel = tk.Label(self.root, text='')
-        self.startButton = tk.Button(self.root, text = 'Start', command=self.startPauseTimer)
-        self.stopButton = tk.Button(self.root, text='Stop', command=self.stopTimer)
-        self.resetButton = tk.Button(self.root, text='Reset', command=self.resetTimer)
+
+        # Initialize the timer control buttons.
+        self.startButton = tk.Button(self.timerControls, text = 'Start', command=self.startPauseTimer)
+        self.stopButton = tk.Button(self.timerControls, text='Stop', command=self.stopTimer)
+        self.resetButton = tk.Button(self.timerControls, text='Reset', command=self.resetTimer)
+        self.startButton.grid(row=0, column=0, padx=5)
+        self.stopButton.grid(row=0, column=1, padx=5)
+        self.resetButton.grid(row=0, column=2, padx=5)
+
+        # Pack top level frames and widgets and start mainloop
         self.timerLabel.pack()
-        self.startButton.pack()
-        self.stopButton.pack()
-        self.resetButton.pack()
+        self.timerControls.pack()
         self.updateTimer()
         self.root.mainloop()
 
