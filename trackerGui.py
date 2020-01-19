@@ -16,6 +16,7 @@ class TrackerGui():
         self.root = tk.Tk()
         self.timerControls = tk.Frame(self.root)
         self.timerContainer = tk.Frame(self.root)
+        self.taskInfoContainer = tk.Frame(self.root)
 
         # Initialize Project label and timer.
         self.projectLabel = tk.Label(self.timerContainer, text='ProjectName')
@@ -31,9 +32,20 @@ class TrackerGui():
         self.stopButton.grid(row=0, column=1, padx=5)
         self.resetButton.grid(row=0, column=2, padx=5)
 
+        # Initialize the task info text fields.
+        self.taskLabel = tk.Label(self.taskInfoContainer, text='Task Name:')
+        self.taskName = tk.Entry(self.taskInfoContainer)
+        self.descriptionLabel = tk.Label(self.taskInfoContainer, text='Task Description:')
+        self.taskDescription = tk.Text(self.taskInfoContainer, height=5)
+        self.taskLabel.grid(row=0, column=0, pady=2, sticky='W')
+        self.taskName.grid(row=1, columnspan=5, pady=2, padx=3, sticky='W')
+        self.descriptionLabel.grid(row=2, column=0, pady=2, sticky='W')
+        self.taskDescription.grid(row=3, columnspan=5, pady=2, padx=3, sticky='W')
+
         # Pack top level frames and widgets and start mainloop
         self.timerContainer.pack()
         self.timerControls.pack()
+        self.taskInfoContainer.pack()
         self.updateTimer()
         self.root.mainloop()
 
