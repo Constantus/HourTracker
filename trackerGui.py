@@ -14,6 +14,7 @@ class TrackerGui():
 
         # Initialize root window and top level frames and top level widgets
         self.root = tk.Tk()
+        self.root.title('Hour Tracker')
         self.timerControls = tk.Frame(self.root)
         self.timerContainer = tk.Frame(self.root)
         self.taskInfoContainer = tk.Frame(self.root)
@@ -37,10 +38,16 @@ class TrackerGui():
         self.taskName = tk.Entry(self.taskInfoContainer)
         self.descriptionLabel = tk.Label(self.taskInfoContainer, text='Task Description:')
         self.taskDescription = tk.Text(self.taskInfoContainer, height=5)
+        self.saveContainer = tk.Frame(self.taskInfoContainer)
+        self.quitButton = tk.Button(self.saveContainer, text='Quit', command=self.quitTracker)
+        self.saveButton = tk.Button(self.saveContainer, text='Save', command=self.saveTracker)
         self.taskLabel.grid(row=0, column=0, pady=2, sticky='W')
         self.taskName.grid(row=1, columnspan=5, pady=2, padx=3, sticky='W')
         self.descriptionLabel.grid(row=2, column=0, pady=2, sticky='W')
         self.taskDescription.grid(row=3, columnspan=5, pady=2, padx=3, sticky='W')
+        self.quitButton.grid(row=0, column=0, pady=2, padx=3, sticky='E')
+        self.saveButton.grid(row=0, column=1, pady=2, padx=3, sticky='E')
+        self.saveContainer.grid(row=4, column=4, sticky='E')
 
         # Pack top level frames and widgets and start mainloop
         self.timerContainer.pack()
@@ -89,3 +96,11 @@ class TrackerGui():
         timeString = '%02d:%02d:%02d:%02d' % (timeTuple[0], timeTuple[1], timeTuple[2], timeTuple[3])
         self.timerPrintOut.configure(text=timeString)
         self.root.after(10, self.updateTimer)
+
+    
+    def quitTracker(self):
+        pass
+
+    
+    def saveTracker(self):
+        pass
