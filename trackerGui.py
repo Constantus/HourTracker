@@ -5,6 +5,10 @@
 import tkinter as tk
 from timer import Timer
 
+# To-Do:
+#   -Add save and quit logic to their functions. 
+#   -Add confirmation message if user quits or resets the timer, perhaps also before a user stops the timer.
+
 class TrackerGui():
     def __init__(self):
         
