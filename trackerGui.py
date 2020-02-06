@@ -3,6 +3,7 @@
 # Date: January 18, 2020
 
 import tkinter as tk
+from tkinter import messagebox
 from timer import Timer
 
 # To-Do:
@@ -103,7 +104,11 @@ class TrackerGui():
 
     
     def quitTracker(self):
-        pass
+        msgBox = tk.messagebox.askquestion('Exit Application', 'Are you sure you want to exit? (Unsaved data will be lost!)', icon = 'warning')
+        if msgBox == 'yes':
+            self.root.destroy()
+        else:
+            tk.messagebox.showinfo('Return', 'You will now return to the application screen.')
 
     
     def saveTracker(self):
