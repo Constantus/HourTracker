@@ -87,12 +87,17 @@ class TrackerGui():
 
     def resetTimer(self):
         """Resets the timer."""
-        self.timer.timerReset()
-        
-        if self.timerStatus == 'running' or self.timerStatus == 'stopped':
-            self.startButton.configure(text='Start')
 
-        self.timerStatus = ''
+        msgBox = tk.messagebox.askquestion('Reset Timer', 'Are you sure you want to reset the timer and clear the fields?', icon = 'warning')
+        if msgBox == 'yes':
+            self.timer.timerReset()
+            self.taskName.delete(0, 'end')
+            self.taskDescription.delete('1.0', 'end -1 chars')
+            
+            if self.timerStatus == 'running' or self.timerStatus == 'stopped':
+                self.startButton.configure(text='Start')
+
+            self.timerStatus = ''
 
 
     def updateTimer(self):
