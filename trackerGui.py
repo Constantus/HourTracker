@@ -3,7 +3,7 @@
 # Date: January 18, 2020
 
 import tkinter as tk
-from tkinter import messagebox
+from tkinter import messagebox, ttk
 from timer import Timer
 
 # To-Do:
@@ -46,6 +46,9 @@ class TrackerGui():
         self.taskName = tk.Entry(self.taskInfoContainer)
         self.descriptionLabel = tk.Label(self.taskInfoContainer, text='Task Description:')
         self.taskDescription = tk.Text(self.taskInfoContainer, height=5)
+        self.scrollbar = ttk.Scrollbar(self.taskInfoContainer, orient = 'vertical', command = self.taskDescription.yview)
+        self.scrollbar.grid(column=5, row=3, sticky='NS')
+        self.taskDescription.config(yscrollcommand = self.scrollbar.set)
         self.saveContainer = tk.Frame(self.taskInfoContainer)
         self.quitButton = tk.Button(self.saveContainer, text='Quit', command=self.quitTracker)
         self.saveButton = tk.Button(self.saveContainer, text='Save', command=self.saveTracker)
@@ -142,4 +145,7 @@ class TrackerGui():
 
     
     def saveTracker(self):
-        pass
+        taskNameStr = self.taskName.get()
+        taskDescriptionStr =self.taskDescription.get("1.0", 'end-1c')
+        print(taskNameStr)
+        print(taskDescriptionStr)
