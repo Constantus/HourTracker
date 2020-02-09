@@ -7,6 +7,7 @@ from tkinter import messagebox, ttk
 from timer import Timer
 
 # To-Do:
+#   -Add rest of file menu and logic
 #   -Add save and quit logic to their functions. 
 #   -Add confirmation message if user quits or resets the timer, perhaps also before a user stops the timer.
 
@@ -23,9 +24,15 @@ class TrackerGui():
         # Initialize root window and top level frames and top level widgets
         self.root = tk.Tk()
         self.root.title('Hour Tracker')
+        self.menubar = tk.Menu(self.root)
         self.timerControls = tk.Frame(self.root)
         self.timerContainer = tk.Frame(self.root)
         self.taskInfoContainer = tk.Frame(self.root)
+
+        # Initialize menu bar
+        fileMenu = tk.Menu(self.menubar, tearoff=0)
+        fileMenu.add_command(label='New Task', command=self.createNewTask)
+        self.menubar.add_cascade(label='File', menu=fileMenu)
 
         # Initialize Project label and timer.
         self.projectLabel = tk.Label(self.timerContainer, text='ProjectName')
@@ -61,6 +68,7 @@ class TrackerGui():
         self.saveContainer.grid(row=4, column=4, sticky='E')
 
         # Pack top level frames and widgets and start mainloop
+        self.root.config(menu=self.menubar)
         self.timerContainer.pack()
         self.timerControls.pack()
         self.taskInfoContainer.pack()
@@ -126,6 +134,10 @@ class TrackerGui():
                 self.startButton.configure(text='Start')
 
             self.timerStatus = ''
+
+
+    def createNewTask(self):
+        pass
 
 
     def updateTimer(self):
