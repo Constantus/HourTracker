@@ -16,6 +16,9 @@ class TrackerGui():
         # Initialize timer and timerStatus
         self.timer = Timer()
         self.timerStatus = ''
+        self.recordList = []
+        self.timeList = []
+        self.totalHours = 0.0
 
         # Initialize root window and top level frames and top level widgets
         self.root = tk.Tk()
@@ -61,28 +64,50 @@ class TrackerGui():
         self.updateTimer()
         self.root.mainloop()
 
+
+    def convertList(self):
+        """Takes the self.timeList, converts it to a tuple and adds it to the 
+        self.recordList. It then resets the self.timeList."""
+        timeList = self.timeList
+        timeTuple = tuple(timeList)
+        self.recordList.append(timeTuple)
+        self.timeList = []
+
     
     def startPauseTimer(self):
         """Starts the timer if it isn't currently running, pauses it if it is."""
         if self.timerStatus == '' or self.timerStatus == 'paused':
-            self.timer.timerStart()
+            startTime = self.timer.timerStart()
             self.startButton.configure(text='Pause')
             self.timerStatus = 'running'
+            self.timeList.append(startTime)
         elif self.timerStatus == 'running':
-            self.timer.timerPause()
+            pauseTime = self.timer.timerPause()
             self.startButton.configure(text='Start')
             self.timerStatus = 'paused'
+            self.timeList.append(pauseTime)
+            self.convertList()
 
         
     def stopTimer(self):
         """Stops the timer if it has been started."""
-        if self.timerStatus != '':
-            self.timer.timerStop()
-            
-            if self.timerStatus == 'running':
-                self.startButton.configure(text='Start')
-            
-            self.timerStatus = 'stopped'
+        if self.timerStatus != '' and self.timerStatus != 'stopped':
+
+            msgBox = tk.messagebox.askquestion('Stop Timer', 'Are you sure you want to start the timer? You will have to start a new task to restart it!', icon = 'warning')
+            if msgBox == 'yes':
+                stopArray = self.timer.timerStop()
+                
+                if self.timerStatus == 'running':
+                    self.startButton.configure(text='Start')
+                
+                self.timerStatus = 'stopped'
+
+                if len(stopArray) > 1:
+                    self.totalHours = stopArray[0]
+                    self.timeList.append(stopArray[1])
+                    self.convertList()
+                else:
+                    self.totalHours = stopArray[0]
 
 
     def resetTimer(self):
